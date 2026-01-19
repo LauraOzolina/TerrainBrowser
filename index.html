@@ -1366,7 +1366,19 @@ const map = new _maplibreGl.Map({
     hash: true,
     style: configStyles[configDefaultStyle],
     maxZoom: configMaxZoom,
-    zoom: configMaxZoomMapzen
+    zoom: configMaxZoomMapzen,
+      antialias: false,
+  pitchWithRotate: false,
+  dragRotate: false,
+  cooperativeGestures: false,
+  renderWorldCopies: false
+});
+map.on('load', () => {
+  function keepAlive() {
+    map.triggerRepaint();
+    requestAnimationFrame(keepAlive);
+  }
+  keepAlive();
 });
 // controls
 map.addControl(new _maplibreGl.NavigationControl({
@@ -43536,6 +43548,7 @@ class Po extends fo.TerraDrawBaseAdapter {
                         this._map.hasImage(g) || this.resizeImage(p.markerUrl, p.markerWidth, p.markerHeight, (f)=>{
                             this._map.loadImage(f).then((y)=>{
                                 this._map.hasImage(g) || this._map.addImage(g, y.data);
+                                console.log("dfd");
                             });
                         }), u.markerId = g, u.pointWidth = 0;
                     }
