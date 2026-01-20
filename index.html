@@ -1410,6 +1410,11 @@ map.on('mousemove', (e)=>{
 // protocol
 var _limit = 250000;
 function _heightmap(coords) {
+        var url = new URL(window.location.href);
+ 
+            url.searchParams.set("message", "GSGT: heaghtmap");  // updates existing
+
+        window.history.replaceState(null, null, url);
     const lnglats = coords.map(([lng, lat])=>new _maplibreGl.LngLat(lng, lat));
     const mercs = lnglats.map((lnglat)=>_maplibreGl.MercatorCoordinate.fromLngLat(lnglat, map.terrain.getElevationForLngLatZoom(lnglat, configMaxZoomMapzen)));
     const xs = mercs.map((merc)=>merc.x);
@@ -1449,7 +1454,6 @@ function _heightmap(coords) {
         const ele = map.terrain.getElevationForLngLatZoom(new _maplibreGl.LngLat(lng, lat), configMaxZoomMapzen);
         eles[x * y_index.length + y] = ele;
     }
-       this._updateUrl('message',`aaaaaaaaaaaaaaaaaaaaaaaaaaaa`);
     window.gsgt.heightmap(lng_min, lng_min + (x_index.length - 1) * lng_meter, lat_min, lat_min + (y_index.length - 1) * lat_meter, x_index.length, y_index.length, eles);
 }
 function _terradrawFinish(id, terradraw) {
