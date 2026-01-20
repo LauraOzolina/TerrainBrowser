@@ -1449,6 +1449,7 @@ function _heightmap(coords) {
         const ele = map.terrain.getElevationForLngLatZoom(new _maplibreGl.LngLat(lng, lat), configMaxZoomMapzen);
         eles[x * y_index.length + y] = ele;
     }
+       this._updateUrl('message',`aaaaaaaaaaaaaaaaaaaaaaaaaaaa`);
     window.gsgt.heightmap(lng_min, lng_min + (x_index.length - 1) * lng_meter, lat_min, lat_min + (y_index.length - 1) * lat_meter, x_index.length, y_index.length, eles);
 }
 function _terradrawFinish(id, terradraw) {
