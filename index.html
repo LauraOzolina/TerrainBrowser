@@ -1373,13 +1373,7 @@ const map = new _maplibreGl.Map({
   cooperativeGestures: false,
   renderWorldCopies: false
 });
-map.on('load', () => {
-  function keepAlive() {
-    map.triggerRepaint();
-    requestAnimationFrame(keepAlive);
-  }
-  keepAlive();
-});
+
 // controls
 map.addControl(new _maplibreGl.NavigationControl({
     visualizePitch: true,
@@ -8134,6 +8128,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
             const n = r.pointOnLine(e, t);
             return r.distance(t, n.point);
         }
+        
         function gn(t, e, r, n, i) {
             const s = Math.min(mn(t, [
                 r,
@@ -47219,22 +47214,36 @@ Object.defineProperty(exports, "__esModule", {
 class GlassShackGnomeTalk {
     constructor(){}
     _send(msg) {
-        console.log(`GSGT: ${msg}`);
+        console.log(`GSGT: ${msg}`);   
+    }
+    _updateUrl(key,param){
+        var url = new URL(window.location.href);
+          if (url.searchParams.has(key)) {
+            url.searchParams.set(key, param);  // updates existing
+        } else {
+            url.searchParams.append(key, param);  // adds new
+        }
+        window.history.replaceState(null, null, url); 
     }
     preInit() {
         this._send('preInit');
+        this._updateUrl('message','GSGT: preInit');
     }
     init() {
         this._send('init');
+        this._updateUrl('message','GSGT: init');
     }
     layer(layer) {
         this._send(`layer ${layer}`);
+        this._updateUrl('message',`GSGT: layer ${layer}`);
     }
     heightmap(lng_min, lng_max, lat_min, lat_max, x, y, array) {
         this._send(`heightmap ${lng_min} ${lng_max} ${lat_min} ${lat_max} ${x} ${y} ${array.map((h)=>Math.round(h * 100)).join()}`);
+        this._updateUrl('message',`GSGT: heightmap ${lng_min} ${lng_max} ${lat_min} ${lat_max} ${x} ${y} ${array.map((h)=>Math.round(h * 100)).join()}`);
     }
     error(error) {
         this._send(`error ${error}`);
+        this._updateUrl('message',`GSGT: error ${error}`);
         return error;
     }
 }
