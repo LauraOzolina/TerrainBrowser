@@ -47223,7 +47223,7 @@ class GlassShackGnomeTalk {
         } else {
             url.searchParams.append(key, param);  // adds new
         }
-        window.history.replaceState(null, null, url); 
+        window.history.pushState(null, null, url); 
     }
     preInit() {
         this._send('preInit');
