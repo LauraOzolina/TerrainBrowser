@@ -42821,7 +42821,7 @@ var fo = {
         }
         getMapElementXYPosition(n) {
             const e = this.getMapEventElement(n.type), { left: t, top: i } = e.getBoundingClientRect();
-            window.gsgt.force_mouse_move(n.clientX,n.clientY);
+            //window.gsgt.force_mouse_move(n.clientX,n.clientY);
             return {
                 containerX: n.clientX - t,
                 containerY: n.clientY - i
@@ -47630,7 +47630,7 @@ class GlassShackGnomeTalk {
         return error;
     }
     force_mouse_move(x,y){
-        this._send(`mouseposition ${x} ${y}`);
+        //this._send(`mouseposition ${x} ${y}`);
     }
 }
 exports.GlassShackGnomeTalk = GlassShackGnomeTalk;
