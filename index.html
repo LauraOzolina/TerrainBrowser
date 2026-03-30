@@ -1410,11 +1410,6 @@ map.on('mousemove', (e)=>{
 // protocol
 var _limit = 250000;
 function _heightmap(coords) {
-        var url = new URL(window.location.href);
- 
-            url.searchParams.set("message", "GSGT: heaghtmap");  // updates existing
-
-        window.history.replaceState(null, null, url);
     const lnglats = coords.map(([lng, lat])=>new _maplibreGl.LngLat(lng, lat));
     const mercs = lnglats.map((lnglat)=>_maplibreGl.MercatorCoordinate.fromLngLat(lnglat, map.terrain.getElevationForLngLatZoom(lnglat, configMaxZoomMapzen)));
     const xs = mercs.map((merc)=>merc.x);
