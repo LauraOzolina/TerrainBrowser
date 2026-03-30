@@ -1366,14 +1366,8 @@ const map = new _maplibreGl.Map({
     hash: true,
     style: configStyles[configDefaultStyle],
     maxZoom: configMaxZoom,
-    zoom: configMaxZoomMapzen,
-      antialias: false,
-  pitchWithRotate: false,
-  dragRotate: false,
-  cooperativeGestures: false,
-  renderWorldCopies: false
+    zoom: configMaxZoomMapzen
 });
-
 // controls
 map.addControl(new _maplibreGl.NavigationControl({
     visualizePitch: true,
@@ -8128,7 +8122,6 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
             const n = r.pointOnLine(e, t);
             return r.distance(t, n.point);
         }
-        
         function gn(t, e, r, n, i) {
             const s = Math.min(mn(t, [
                 r,
@@ -43543,7 +43536,6 @@ class Po extends fo.TerraDrawBaseAdapter {
                         this._map.hasImage(g) || this.resizeImage(p.markerUrl, p.markerWidth, p.markerHeight, (f)=>{
                             this._map.loadImage(f).then((y)=>{
                                 this._map.hasImage(g) || this._map.addImage(g, y.data);
-                                console.log("dfd");
                             });
                         }), u.markerId = g, u.pointWidth = 0;
                     }
@@ -47214,36 +47206,22 @@ Object.defineProperty(exports, "__esModule", {
 class GlassShackGnomeTalk {
     constructor(){}
     _send(msg) {
-        console.log(`GSGT: ${msg}`);   
-    }
-    _updateUrl(key,param){
-        var url = new URL(window.location.href);
-          if (url.searchParams.has(key)) {
-            url.searchParams.set(key, param);  // updates existing
-        } else {
-            url.searchParams.append(key, param);  // adds new
-        }
-        window.history.replaceState(null, null, url); 
+        console.log(`GSGT: ${msg}`);
     }
     preInit() {
         this._send('preInit');
-        this._updateUrl('message','GSGT: preInit');
     }
     init() {
         this._send('init');
-        this._updateUrl('message','GSGT: init');
     }
     layer(layer) {
         this._send(`layer ${layer}`);
-        this._updateUrl('message',`GSGT: layer ${layer}`);
     }
     heightmap(lng_min, lng_max, lat_min, lat_max, x, y, array) {
         this._send(`heightmap ${lng_min} ${lng_max} ${lat_min} ${lat_max} ${x} ${y} ${array.map((h)=>Math.round(h * 100)).join()}`);
-        this._updateUrl('message',`GSGT: heightmap ${lng_min} ${lng_max} ${lat_min} ${lat_max} ${x} ${y} ${array.map((h)=>Math.round(h * 100)).join()}`);
     }
     error(error) {
         this._send(`error ${error}`);
-        this._updateUrl('message',`GSGT: error ${error}`);
         return error;
     }
 }
